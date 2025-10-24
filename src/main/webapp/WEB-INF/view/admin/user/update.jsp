@@ -23,14 +23,14 @@
                             </div>
                             <hr />
                             <form:form method="post" action="/admin/user/update" modelAttribute="user">
-                                <div class="mb-3">
+                                <div class="mb-3" style="display: none">
                                     <label class="form-label">ID: </label>
-                                    <form:input type="text" class="form-control" path="id" disabled="true" />
+                                    <form:input type="text" class="form-control" path="id" />
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Email: </label>
-                                    <form:input type="email" class="form-control" path="email" />
+                                    <form:input type="email" class="form-control" path="email" readonly="true" />
                                 </div>
 
                                 <div class="mb-3">
