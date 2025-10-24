@@ -44,7 +44,9 @@ public class UserController {
 
     @RequestMapping("/admin/user/{id}")
     public String getUserDetailPage(Model model, @PathVariable("id") long id) {
+        User user = this.userService.getUserById(id);
         model.addAttribute("id", id);
+        model.addAttribute("user", user);
         return "admin/user/show";
     }
 

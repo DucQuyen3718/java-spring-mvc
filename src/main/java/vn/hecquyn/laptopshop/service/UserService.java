@@ -34,8 +34,7 @@ public class UserService {
         return eric;
     }
 
-    // public User handleGetAnUser(long id) {
-    //     User user = this.userRepository.findById(id);
-    //     return user;
-    // }
+    public User getUserById(long id) {
+        return this.userRepository.findById(id);
+    }
 }
