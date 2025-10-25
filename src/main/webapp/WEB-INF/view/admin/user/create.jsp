@@ -33,7 +33,7 @@
                                     <div class="col-md-6 col-12 mx-auto">
                                         <h3>Create a user</h3>
                                         <hr />
-                                        <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
+                                        <!-- <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
                                             <div class="mb-3">
                                                 <label class="form-label">Email: </label>
                                                 <form:input type="email" class="form-control" path="email" />
@@ -57,6 +57,51 @@
                                             </div>
 
                                             <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form:form > -->
+
+                                        <form:form method="post" action="/admin/user/create" modelAttribute="newUser"
+                                            class="row g-3">
+                                            <div class="col-12 col-md-6">
+                                                <label class="form-label">Email: </label>
+                                                <form:input type="email" class="form-control" path="email" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Password: </label>
+                                                <form:input type="password" class="form-control" path="password" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Phone Number: </label>
+                                                <form:input type="text" class="form-control" path="phone" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Full Name: </label>
+                                                <form:input type="text" class="form-control" path="fullName" />
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Address: </label>
+                                                <form:input type="text" class="form-control" path="address" />
+                                            </div>
+
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label class="form-label">Role: </label>
+                                                <select class="form-select">
+                                                    <option value="1" selected>ADMIN</option>
+                                                    <option value="2">USER</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label for="avatarFile" class="form-label">Avatar:</label>
+                                                <input class="form-control" type="file" id="avatarFile"
+                                                    accept=".png, .jpg, .jpeg">
+                                            </div>
+                                            <div class="col-12 mb-1">
+                                                <img style="max-height: 250px; display: none;" src=""
+                                                    alt="avatar preview" id="avatarPreview">
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <button class="btn btn-primary">Create</button>
+                                                <a href="/admin/user" class="btn btn-success mx-2">Back</a>
+                                            </div>
                                         </form:form>
                                     </div>
                                 </div>
