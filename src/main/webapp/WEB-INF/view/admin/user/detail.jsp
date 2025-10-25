@@ -32,23 +32,23 @@
                                 <div class="container mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
+                                            <jsp:include page="../layout/header.jsp" />
                                             <div class="d-flex justify-content-between">
-                                                <h3>Delete the user with ID = ${id}</h3>
+                                                <h3>User detail with Id: ${id}</h3>
                                             </div>
                                             <hr />
-                                            <div class="alert alert-danger" role="alert">
-                                                Are you sure to delete this user ?
-                                            </div>
-                                            <form:form method="post" action="/admin/user/delete" modelAttribute="user">
-                                                <div class="mb-3" style="display: none">
-                                                    <label class="form-label">ID: </label>
-                                                    <form:input type="text" class="form-control" path="id"
-                                                        value="${id}" />
+                                            <div class="card" style="width: 60%;">
+                                                <div class="card-header">
+                                                    User information
                                                 </div>
-
-                                                <button class="btn btn-danger">Confirm</button>
-                                                <a href="/admin/user" class="btn btn-success mx-2">Back</a>
-                                            </form:form>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">ID: ${user.id}</li>
+                                                    <li class="list-group-item">Email: ${user.email}</li>
+                                                    <li class="list-group-item">Full Name: ${user.fullName}</li>
+                                                    <li class="list-group-item">Address: ${user.address}</li>
+                                                </ul>
+                                            </div>
+                                            <a href="/admin/user" class="btn btn-success mt-3">Back</a>
                                         </div>
                                     </div>
                                 </div>
