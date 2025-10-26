@@ -6,7 +6,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,17 +65,22 @@ public class UserController {
     @PostMapping(value = "/admin/user/create")
     public String createUser(Model model,
             @ModelAttribute("newUser") @Valid User hoidanit,
-            BindingResult bindingResult,
+            BindingResult newUserBindingResult,
             @RequestParam("hoidanitFile") MultipartFile file) {
-        List<FieldError> errors = bindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(">>>>>>>" + error.getObjectName() + " - " + error.getDefaultMessage());
+        // List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        // for (FieldError error : errors) {
+        //     System.out.println(">>>>>>> " + error.getField() + " - " + error.getDefaultMessage());
+        // }
+
+        // validate
+        if (newUserBindingResult.hasErrors()) {
+            return "admin/user/create";
         }
+        //
+
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(hoidanit.getPassword());
 
-        // validate
-        //
         hoidanit.setAvatar(avatar);
         hoidanit.setPassword(hashPassword);
         hoidanit.setRole(this.userService.getRoleByName(hoidanit.getRole().getName()));
