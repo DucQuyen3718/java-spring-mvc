@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.validation.Valid;
 import vn.hecquyn.laptopshop.domain.User;
 import vn.hecquyn.laptopshop.service.UploadService;
 import vn.hecquyn.laptopshop.service.UserService;
@@ -57,15 +60,23 @@ public class UserController {
     @RequestMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
-        // nodel.addAttribute("role", )
         return "admin/user/create";
     }
 
     @PostMapping(value = "/admin/user/create")
-    public String createUser(Model model, @ModelAttribute("newUser") User hoidanit, @RequestParam("hoidanitFile") MultipartFile file) {
+    public String createUser(Model model,
+            @ModelAttribute("newUser") @Valid User hoidanit,
+            BindingResult bindingResult,
+            @RequestParam("hoidanitFile") MultipartFile file) {
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>>>>>" + error.getObjectName() + " - " + error.getDefaultMessage());
+        }
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(hoidanit.getPassword());
 
+        // validate
+        //
         hoidanit.setAvatar(avatar);
         hoidanit.setPassword(hashPassword);
         hoidanit.setRole(this.userService.getRoleByName(hoidanit.getRole().getName()));
