@@ -30,17 +30,15 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping("/")
-    public String getHomePage(Model model) {
-        List<User> arrUsers = this.userService.getAllUsersByEmail("1@gmail.com");
-        System.out.println(arrUsers);
-
-        String test = this.userService.handleHello();
-        model.addAttribute("eric", test);
-        model.addAttribute("hoidanit", "from controller with model");
-        return "hello";
-    }
-
+    // @RequestMapping("/")
+    // public String getHomePage(Model model) {
+    //     List<User> arrUsers = this.userService.getAllUsersByEmail("1@gmail.com");
+    //     System.out.println(arrUsers);
+    //     String test = this.userService.handleHello();
+    //     model.addAttribute("eric", test);
+    //     model.addAttribute("hoidanit", "from controller with model");
+    //     return "hello";
+    // }
     @RequestMapping("/admin/user")
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUsers();
@@ -86,10 +84,15 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String PostUpdateUser(Model model, @ModelAttribute("user") User user) {
+    public String PostUpdateUser(Model model, @ModelAttribute("user") User user, @RequestParam("hoidanitFile") MultipartFile file) {
+
         User currentUser = this.userService.getUserById(user.getId());
 
         if (currentUser != null) {
+            String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+            currentUser.setAvatar(avatar);
+            currentUser.setRole(this.userService.getRoleByName(user.getRole().getName()));
+
             currentUser.setAddress(user.getAddress());
             currentUser.setFullName(user.getFullName());
             currentUser.setPhone(user.getPhone());

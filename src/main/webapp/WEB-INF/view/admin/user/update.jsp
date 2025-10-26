@@ -36,7 +36,8 @@
                                                 <h3>Update a User</h3>
                                             </div>
                                             <hr />
-                                            <form:form method="post" action="/admin/user/update" modelAttribute="user">
+                                            <form:form enctype="multipart/form-data" method="post"
+                                                action="/admin/user/update" modelAttribute="user">
                                                 <div class="mb-3" style="display: none">
                                                     <label class="form-label">ID: </label>
                                                     <form:input type="text" class="form-control" path="id" />
@@ -59,6 +60,22 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">Address: </label>
                                                     <form:input type="text" class="form-control" path="address" />
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Role: </label>
+                                                    <form:select class="form-select" path="role.name">
+                                                        <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option>
+                                                    </form:select>
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-5">
+                                                    <label for="avatarFile" class="form-label">Avatar:</label>
+                                                    <input name="hoidanitFile" class="form-control" type="file"
+                                                        id="avatarFile" accept=".png, .jpg, .jpeg" />
+                                                </div>
+                                                <div class="col-12 mb-1 col-md-6">
+                                                    <img style="max-height: 250px; display: none;" src=""
+                                                        alt="avatar preview" id="avatarPreview">
                                                 </div>
 
                                                 <button type="submit" class="btn btn-warning">Update</button>
