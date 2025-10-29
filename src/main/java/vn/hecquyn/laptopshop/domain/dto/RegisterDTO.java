@@ -1,5 +1,8 @@
 package vn.hecquyn.laptopshop.domain.dto;
 
+import vn.hecquyn.laptopshop.service.validator.RegisterChecked;
+
+@RegisterChecked
 public class RegisterDTO {
 
     private String firstName;

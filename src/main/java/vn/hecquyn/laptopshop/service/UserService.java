@@ -21,6 +21,10 @@ public class UserService {
         this.roleRepository = roleRepository;
     }
 
+    public boolean checkEmailExist(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
+
     public String handleHello() {
         return "Hello from Service";
     }
